@@ -4,26 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class SelectionSort {
+class SelectionSort {
 
-    public List<Integer> ascending(final List<Integer> input) {
-        return sort(input, "asc");
+    List<Integer> ascending(final List<Integer> input) {
+        return sort(input, Order.ASC);
     }
 
-    public List<Integer> descending(final List<Integer> input) {
-        return sort(input, "desc");
+    List<Integer> descending(final List<Integer> input) {
+        return sort(input, Order.DESC);
     }
 
-    private static List<Integer> sort(final List<Integer> input, String type) {
+    private static List<Integer> sort(final List<Integer> input, Order type) {
         List<Integer> inputItems = new ArrayList<>(input);
         List<Integer> output = new ArrayList<>();
         int number = 0;
-        while(inputItems.size() > 0) {
-            if(type == "asc") {
-                number = findMin(inputItems);
-            }
-            else {
-                number = findMax(inputItems);
+        while(notEmpty(inputItems)) {
+            switch(type) {
+                case ASC:
+                    number = findMin(inputItems);
+                    break;
+                case DESC:
+                    number = findMax(inputItems);
+                    break;
             }
             output.add(number);
             inputItems.remove(inputItems.indexOf(number));
@@ -41,5 +43,14 @@ public class SelectionSort {
         return input.stream()
                 .mapToInt(v -> v)
                 .max().orElseThrow(NoSuchElementException::new);
+    }
+
+    private static boolean notEmpty(List<Integer> input) {
+        return !input.isEmpty();
+    }
+
+    private enum Order {
+        ASC,
+        DESC
     }
 }
