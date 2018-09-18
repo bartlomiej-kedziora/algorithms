@@ -5,35 +5,41 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class SelectionSort {
-    private int findMin(List<Integer> input) {
+
+    public List<Integer> ascending(final List<Integer> input) {
+        return sort(input, "asc");
+    }
+
+    public List<Integer> descending(final List<Integer> input) {
+        return sort(input, "desc");
+    }
+
+    private static List<Integer> sort(final List<Integer> input, String type) {
+        List<Integer> inputItems = new ArrayList<>(input);
+        List<Integer> output = new ArrayList<>();
+        int number = 0;
+        while(inputItems.size() > 0) {
+            if(type == "asc") {
+                number = findMin(inputItems);
+            }
+            else {
+                number = findMax(inputItems);
+            }
+            output.add(number);
+            inputItems.remove(inputItems.indexOf(number));
+        }
+        return output;
+    }
+
+    private static int findMin(List<Integer> input) {
         return input.stream()
                 .mapToInt(v -> v)
                 .min().orElseThrow(NoSuchElementException::new);
     }
 
-    private int findMax(List<Integer> input) {
+    private static int findMax(List<Integer> input) {
         return input.stream()
                 .mapToInt(v -> v)
                 .max().orElseThrow(NoSuchElementException::new);
-    }
-
-    public List<Integer> ascending(List<Integer> input) {
-        List<Integer> output = new ArrayList<>();
-        while(input.size() > 0) {
-                int min = findMin(input);
-                output.add(min);
-                input.remove(input.indexOf(min));
-        }
-        return output;
-    }
-
-    public List<Integer> descending(List<Integer> input) {
-        List<Integer> output = new ArrayList<>();
-        while(input.size() > 0) {
-            int max = findMax(input);
-            output.add(max);
-            input.remove(input.indexOf(max));
-        }
-        return output;
     }
 }
