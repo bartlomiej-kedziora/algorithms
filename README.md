@@ -21,9 +21,14 @@ $ ./gradlew --info :binary-search:test --tests "com.algorithms.search.BinarySear
 ## Table of contents
 
 1. [Binary search](#binary-search)
+2. [Selection sort](#selection-sort)
 
 ## Binary search
 
 - search algorithm that finds the position of a target value within a sorted array (more: https://en.wikipedia.org/wiki/Binary_search_algorithm)
 - runs in logarithmic time in the worst case, making O(log n) comparisons, where n is the number of elements in the array
 
+## Selection sort
+
+- just sort algorithm (more: https://en.wikipedia.org/wiki/Selection_sort)
+- it has O(n<sup>2</sup>) time complexity, making it inefficient on large lists
