@@ -15,7 +15,7 @@ public class SelectionSortTest {
     private static int testCounter = 0;
     private long startTestTime;
     private long stopTestTime;
-    private SelectionSort selectionSort = new SelectionSort();
+    private Sort selectionSort = new SelectionSort();
 
     @Before
     public void before() {
@@ -79,8 +79,8 @@ public class SelectionSortTest {
     }
 
     @Test
-    public void testTwoInputItemsSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{1, 2});
+    public void test122OrderSort() {
+        List<Integer> unsorted = Arrays.asList(new Integer[]{1, 2, 2});
 
         List<Integer> sorted = selectionSort.ascending(unsorted);
         List<Integer> expected = Arrays.asList(new Integer[]{1, 2});
@@ -89,61 +89,31 @@ public class SelectionSortTest {
     }
 
     @Test
-    public void test123OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{1, 2, 3});
+    public void test1222OrderSort() {
+        List<Integer> unsorted = Arrays.asList(new Integer[]{1, 2, 2, 2});
 
         List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
+        List<Integer> expected = Arrays.asList(new Integer[]{1, 2});
 
         Assert.assertThat(sorted, is(expected));
     }
 
     @Test
-    public void test132OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{1, 3, 2});
+    public void test22OrderSort() {
+        List<Integer> unsorted = Arrays.asList(new Integer[]{2, 2});
 
         List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
+        List<Integer> expected = Arrays.asList(new Integer[]{2});
 
         Assert.assertThat(sorted, is(expected));
     }
 
     @Test
-    public void test213OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{2, 1, 3});
+    public void test222OrderSort() {
+        List<Integer> unsorted = Arrays.asList(new Integer[]{2, 2, 2});
 
         List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
-
-        Assert.assertThat(sorted, is(expected));
-    }
-
-    @Test
-    public void test231OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{2, 3, 1});
-
-        List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
-
-        Assert.assertThat(sorted, is(expected));
-    }
-
-    @Test
-    public void test312OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{3, 1, 2});
-
-        List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
-
-        Assert.assertThat(sorted, is(expected));
-    }
-
-    @Test
-    public void test321OrderSort() {
-        List<Integer> unsorted = Arrays.asList(new Integer[]{3, 2, 1});
-
-        List<Integer> sorted = selectionSort.ascending(unsorted);
-        List<Integer> expected = Arrays.asList(new Integer[]{1, 2, 3});
+        List<Integer> expected = Arrays.asList(new Integer[]{2});
 
         Assert.assertThat(sorted, is(expected));
     }
@@ -167,4 +137,5 @@ public class SelectionSortTest {
 
         Assert.assertThat(sorted, is(expected));
     }
+
 }

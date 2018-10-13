@@ -1,52 +1,51 @@
 package com.algorithms.sort;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.function.Function;
 
-class SelectionSort {
+class SelectionSort implements Sort {
 
-    List<Integer> ascending(final List<Integer> input) {
+    public List<Integer> ascending(final List<Integer> input) {
         return sort(input, Order.ASC);
     }
 
-    List<Integer> descending(final List<Integer> input) {
+    public List<Integer> descending(final List<Integer> input) {
         return sort(input, Order.DESC);
     }
 
-    private static List<Integer> sort(final List<Integer> input, Order type) {
+    private static List<Integer> sort(final List<Integer> input, Order order) {
         List<Integer> inputItems = new ArrayList<>(input);
         List<Integer> output = new ArrayList<>();
-        int number = 0;
+        int inputNumber;
+        int lastAddedNumber = 0;
+
         while(notEmpty(inputItems)) {
-            switch(type) {
-                case ASC:
-                    number = findMin(inputItems);
-                    break;
-                case DESC:
-                    number = findMax(inputItems);
-                    break;
+            inputNumber = findMinOrMax(inputItems,order);
+            if(inputNumber != lastAddedNumber) {
+                output.add(inputNumber);
             }
-            output.add(number);
-            inputItems.remove(inputItems.indexOf(number));
+            lastAddedNumber = inputNumber;
+            inputItems.remove(inputItems.indexOf(inputNumber));
         }
         return output;
     }
 
-    private static int findMin(List<Integer> input) {
+    private static int findMinOrMax(List<Integer> input, Order order) {
+        Comparator<Integer> comparator = isMinOrMax(order);
         return input.stream()
-                .mapToInt(v -> v)
-                .min().orElseThrow(NoSuchElementException::new);
-    }
-
-    private static int findMax(List<Integer> input) {
-        return input.stream()
-                .mapToInt(v -> v)
-                .max().orElseThrow(NoSuchElementException::new);
+                .min(comparator)
+                .orElseThrow(NoSuchElementException::new);
     }
 
     private static boolean notEmpty(List<Integer> input) {
         return !input.isEmpty();
+    }
+
+    private static Comparator<Integer> isMinOrMax(Order order) {
+        if(order.equals(Order.ASC)) {
+            return Comparator.naturalOrder();
+        }
+        return Comparator.reverseOrder();
     }
 
     private enum Order {
