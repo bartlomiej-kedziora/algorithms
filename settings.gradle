@@ -1,3 +1,4 @@
 rootProject.name = 'algorithms'
 include 'binary-search'
+include 'selection-sort'
 
